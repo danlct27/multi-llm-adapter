@@ -1,0 +1,20 @@
+{
+  "name": "multi-llm-adapter",
+  "version": "0.1.0",
+  "description": "Unified LLM adapter layer supporting Claude, DeepSeek, Kimi, and other providers",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "lint": "eslint src/"
+  },
+  "keywords": ["llm", "claude", "deepseek", "kimi", "adapter"],
+  "author": "Dan Li",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
+  }
+}
