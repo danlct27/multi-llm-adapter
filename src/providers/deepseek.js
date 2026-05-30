@@ -24,7 +24,7 @@ export class DeepSeekProvider extends LLMProvider {
         'Authorization': `Bearer ${this.apiKey}`,
       },
       body: JSON.stringify({
-        model: model || 'deepseek-chat',
+        model: model || 'deepseek-v4-flash',
         messages: formattedMessages,
         max_tokens: maxTokens,
         temperature,
@@ -58,7 +58,7 @@ export class DeepSeekProvider extends LLMProvider {
         'Authorization': `Bearer ${this.apiKey}`,
       },
       body: JSON.stringify({
-        model: model || 'deepseek-chat',
+        model: model || 'deepseek-v4-flash',
         messages: formattedMessages,
         max_tokens: maxTokens,
         tools: this._formatTools(tools),
@@ -100,7 +100,7 @@ export class DeepSeekProvider extends LLMProvider {
         'Authorization': `Bearer ${this.apiKey}`,
       },
       body: JSON.stringify({
-        model: model || 'deepseek-chat',
+        model: model || 'deepseek-v4-flash',
         messages: formattedMessages,
         max_tokens: maxTokens,
         temperature,

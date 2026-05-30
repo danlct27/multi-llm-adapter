@@ -9,8 +9,8 @@ import { SteeringLoader } from './steering.js';
  */
 const MODEL_MAP = {
   deepseek: {
-    'claude-opus-4-20250514': 'deepseek-chat',
-    'claude-sonnet-4-20250514': 'deepseek-chat',
+    'claude-opus-4-20250514': 'deepseek-v4-pro',
+    'claude-sonnet-4-20250514': 'deepseek-v4-flash',
   },
   kimi: {
     'claude-opus-4-20250514': 'moonshot-v1-128k',
