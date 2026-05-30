@@ -33,6 +33,11 @@ export class SteeringLoader {
     return filtered.map(f => path.join(this.steeringDir, f));
   }
 
+  /** Alias for load() — used by orchestrator */
+  buildSystemPrompt(opts) {
+    return this.load(opts);
+  }
+
   _parseFile(filePath) {
     const raw = fs.readFileSync(filePath, 'utf-8');
     // Strip YAML frontmatter
