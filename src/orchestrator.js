@@ -5,6 +5,20 @@ import { SessionMemory } from './memory.js';
 import { SteeringLoader } from './steering.js';
 
 /**
+ * Model name mapping — translates canonical model names to provider-specific names.
+ */
+const MODEL_MAP = {
+  deepseek: {
+    'claude-opus-4-20250514': 'deepseek-chat',
+    'claude-sonnet-4-20250514': 'deepseek-chat',
+  },
+  kimi: {
+    'claude-opus-4-20250514': 'moonshot-v1-128k',
+    'claude-sonnet-4-20250514': 'moonshot-v1-32k',
+  },
+};
+
+/**
  * MultiLLMOrchestrator — the main integration point.
  * Combines fallback providers, agent routing, emotional system, and memory.
  */
@@ -70,6 +84,13 @@ export class MultiLLMOrchestrator {
   }
 
   /**
+   * Resolve model name for a specific provider
+   */
+  _resolveModel(model, providerName) {
+    return MODEL_MAP[providerName]?.[model] || model;
+  }
+
+  /**
    * Send a message using the appropriate agent and provider
    * @param {Object} params
    * @param {string} params.message - User message
@@ -121,7 +142,7 @@ export class MultiLLMOrchestrator {
       if (await provider.isAvailable()) {
         try {
           const result = await provider.chat({
-            model: agent.model,
+            model: this._resolveModel(agent.model, preferredProvider),
             messages: [{ role: 'user', content: message }],
             system,
           });
@@ -138,7 +159,7 @@ export class MultiLLMOrchestrator {
 
     // Fallback to the general fallback provider
     const result = await this.provider.chat({
-      model: agent.model,
+      model: this._resolveModel(agent.model, this.provider.getActiveProvider() || 'claude'),
       messages: [{ role: 'user', content: message }],
       system,
     });
